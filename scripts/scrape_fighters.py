@@ -9,6 +9,15 @@ chars = [chr(c) for c in range(97, 123)]
 # base_url + a..z
 urls = ["http://www.ufcstats.com/statistics/fighters?char=" + c for c in chars]
 
+class Record:
+    def __init__(self, wins, losses, draws):
+        self.wins = wins
+        self.losses = losses
+        self.draws = draws
+        
+    def get_wins(self):
+        return self.wins
+
 class Fighter:
     def __init__(self, name, record, nickname, stance, dob):
         self.name = self._format_name(name)
@@ -18,7 +27,7 @@ class Fighter:
         self.dob = self._format_dob(dob)
 
     def print(self):
-        print(f'{self.name}: {self.record}')
+        print(f'{self.name} has won {self.record.get_wins()} fights')
 
     @staticmethod
     def _format_name(name):
@@ -26,7 +35,8 @@ class Fighter:
     
     @staticmethod
     def _format_record(record):
-        return record
+        record = record.split("-")
+        return Record(record[0], record[1], record[2])
     
     @staticmethod
     def _format_nickname(nickname):
