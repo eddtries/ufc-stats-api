@@ -12,7 +12,16 @@ Table fighter {
 }
 
 Table fight {
+  id integer [primary key]
   fighter_id_b integer [ref: - fighter.id]
   fighter_id_a integer [ref: - fighter.id]
+  stats_id integer [ref: < stats.id]
+  result integer
+}
+
+Table stats {
+  id integer [primary key]
+  fighter_id  integer [ref: - fighter.id]
+  strikes integer
 }
 ```
